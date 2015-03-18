@@ -61,10 +61,12 @@ data <- cbind(ysub, Xsel)
 
 ## Merge with alabel to replace activity_labels with activity
 
-fdata <- merge(data,alabel)
-fdata <- arrange(fdata, subject_id)
-fdata <- mutate(fdata, activity_labels = activity)
-fdata <- select(fdata, subject_id, activity_labels, 3:35, -activity)
+fdata <-
+  data %>% 
+  merge(alabel) %>%
+  arrange(subject_id) %>%
+  mutate(activity_labels = activity) %>%
+  select(subject_id, activity_labels, 3:35, -activity)
 oldname <- names(fdata)
 oldname[2] <- "activity"
 names(fdata) <- oldname
